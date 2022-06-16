@@ -54,32 +54,32 @@ function Playground() {
 		let newArray: number[][] = cloneDeep(boardContentArray);
 
 		for (let i = 0; i < 4; i++) {
-			let b: number[] = newArray[i];
-			let slow: number = 0;
-			let fast: number = 1;
-			while (slow < 4) {
-				if (fast === 4) {
-					fast = slow + 1;
-					slow++;
+			let gridRow: number[] = newArray[i];
+			let trackerOne: number = 0;
+			let trackerTwo: number = 1;
+			while (trackerOne < 4) {
+				if (trackerTwo === 4) {
+					trackerTwo = trackerOne + 1;
+					trackerOne++;
 					continue;
 				}
-				if (b[slow] === 0 && b[fast] === 0) {
-					fast++;
-				} else if (b[slow] === 0 && b[fast] !== 0) {
-					b[slow] = b[fast];
-					b[fast] = 0;
-					fast++;
-				} else if (b[slow] !== 0 && b[fast] === 0) {
-					fast++;
-				} else if (b[slow] !== 0 && b[fast] !== 0) {
-					if (b[slow] === b[fast]) {
-						b[slow] = b[slow] + b[fast];
-						b[fast] = 0;
-						fast = slow + 1;
-						slow++;
+				if (gridRow[trackerOne] === 0 && gridRow[trackerTwo] === 0) {
+					trackerTwo++;
+				} else if (gridRow[trackerOne] === 0 && gridRow[trackerTwo] !== 0) {
+					gridRow[trackerOne] = gridRow[trackerTwo];
+					gridRow[trackerTwo] = 0;
+					trackerTwo++;
+				} else if (gridRow[trackerOne] !== 0 && gridRow[trackerTwo] === 0) {
+					trackerTwo++;
+				} else if (gridRow[trackerOne] !== 0 && gridRow[trackerTwo] !== 0) {
+					if (gridRow[trackerOne] === gridRow[trackerTwo]) {
+						gridRow[trackerOne] = gridRow[trackerOne] + gridRow[trackerTwo];
+						gridRow[trackerTwo] = 0;
+						trackerTwo = trackerOne + 1;
+						trackerOne++;
 					} else {
-						slow++;
-						fast = slow + 1;
+						trackerOne++;
+						trackerTwo = trackerOne + 1;
 					}
 				}
 			}
@@ -99,32 +99,32 @@ function Playground() {
 		let newArray: number[][] = cloneDeep(boardContentArray);
 
 		for (let i = 3; i >= 0; i--) {
-			let b: number[] = newArray[i];
-			let slow: number = b.length - 1;
-			let fast: number = slow - 1;
-			while (slow > 0) {
-				if (fast === -1) {
-					fast = slow - 1;
-					slow--;
+			let gridRow: number[] = newArray[i];
+			let trackerOne: number = gridRow.length - 1;
+			let trackerTwo: number = trackerOne - 1;
+			while (trackerOne > 0) {
+				if (trackerTwo === -1) {
+					trackerTwo = trackerOne - 1;
+					trackerOne--;
 					continue;
 				}
-				if (b[slow] === 0 && b[fast] === 0) {
-					fast--;
-				} else if (b[slow] === 0 && b[fast] !== 0) {
-					b[slow] = b[fast];
-					b[fast] = 0;
-					fast--;
-				} else if (b[slow] !== 0 && b[fast] === 0) {
-					fast--;
-				} else if (b[slow] !== 0 && b[fast] !== 0) {
-					if (b[slow] === b[fast]) {
-						b[slow] = b[slow] + b[fast];
-						b[fast] = 0;
-						fast = slow - 1;
-						slow--;
+				if (gridRow[trackerOne] === 0 && gridRow[trackerTwo] === 0) {
+					trackerTwo--;
+				} else if (gridRow[trackerOne] === 0 && gridRow[trackerTwo] !== 0) {
+					gridRow[trackerOne] = gridRow[trackerTwo];
+					gridRow[trackerTwo] = 0;
+					trackerTwo--;
+				} else if (gridRow[trackerOne] !== 0 && gridRow[trackerTwo] === 0) {
+					trackerTwo--;
+				} else if (gridRow[trackerOne] !== 0 && gridRow[trackerTwo] !== 0) {
+					if (gridRow[trackerOne] === gridRow[trackerTwo]) {
+						gridRow[trackerOne] = gridRow[trackerOne] + gridRow[trackerTwo];
+						gridRow[trackerTwo] = 0;
+						trackerTwo = trackerOne - 1;
+						trackerOne--;
 					} else {
-						slow--;
-						fast = slow - 1;
+						trackerOne--;
+						trackerTwo = trackerOne - 1;
 					}
 				}
 			}
@@ -140,88 +140,88 @@ function Playground() {
 	};
 
 	const swipeDown = (checkerFlag: boolean) => {
-		let b: number[][] = cloneDeep(boardContentArray);
+		let grid: number[][] = cloneDeep(boardContentArray);
 		let oldBoardContentArray = JSON.parse(JSON.stringify(boardContentArray));
 		for (let i = 3; i >= 0; i--) {
-			let slow = b.length - 1;
-			let fast = slow - 1;
-			while (slow > 0) {
-				if (fast === -1) {
-					fast = slow - 1;
-					slow--;
+			let trackerOne = grid.length - 1;
+			let trackerTwo = trackerOne - 1;
+			while (trackerOne > 0) {
+				if (trackerTwo === -1) {
+					trackerTwo = trackerOne - 1;
+					trackerOne--;
 					continue;
 				}
-				if (b[slow][i] === 0 && b[fast][i] === 0) {
-					fast--;
-				} else if (b[slow][i] === 0 && b[fast][i] !== 0) {
-					b[slow][i] = b[fast][i];
-					b[fast][i] = 0;
-					fast--;
-				} else if (b[slow][i] !== 0 && b[fast][i] === 0) {
-					fast--;
-				} else if (b[slow][i] !== 0 && b[fast][i] !== 0) {
-					if (b[slow][i] === b[fast][i]) {
-						b[slow][i] = b[slow][i] + b[fast][i];
-						b[fast][i] = 0;
-						fast = slow - 1;
-						slow--;
+				if (grid[trackerOne][i] === 0 && grid[trackerTwo][i] === 0) {
+					trackerTwo--;
+				} else if (grid[trackerOne][i] === 0 && grid[trackerTwo][i] !== 0) {
+					grid[trackerOne][i] = grid[trackerTwo][i];
+					grid[trackerTwo][i] = 0;
+					trackerTwo--;
+				} else if (grid[trackerOne][i] !== 0 && grid[trackerTwo][i] === 0) {
+					trackerTwo--;
+				} else if (grid[trackerOne][i] !== 0 && grid[trackerTwo][i] !== 0) {
+					if (grid[trackerOne][i] === grid[trackerTwo][i]) {
+						grid[trackerOne][i] = grid[trackerOne][i] + grid[trackerTwo][i];
+						grid[trackerTwo][i] = 0;
+						trackerTwo = trackerOne - 1;
+						trackerOne--;
 					} else {
-						slow--;
-						fast = slow - 1;
+						trackerOne--;
+						trackerTwo = trackerOne - 1;
 					}
 				}
 			}
 		}
-		if (JSON.stringify(b) !== JSON.stringify(oldBoardContentArray)) {
-			addNumber(b);
+		if (JSON.stringify(grid) !== JSON.stringify(oldBoardContentArray)) {
+			addNumber(grid);
 		}
 		if (checkerFlag) {
-			return b;
+			return grid;
 		} else {
-			setData(b);
+			setData(grid);
 		}
 	};
 
 	const swipeUp = (checkerFlag: boolean) => {
-		let b: number[][] = cloneDeep(boardContentArray);
+		let grid: number[][] = cloneDeep(boardContentArray);
 		let oldBoardContentArray = JSON.parse(JSON.stringify(boardContentArray));
 		for (let i = 0; i < 4; i++) {
-			let slow = 0;
-			let fast = 1;
-			while (slow < 4) {
-				if (fast === 4) {
-					fast = slow + 1;
-					slow++;
+			let trackerOne = 0;
+			let trackerTwo = 1;
+			while (trackerOne < 4) {
+				if (trackerTwo === 4) {
+					trackerTwo = trackerOne + 1;
+					trackerOne++;
 					continue;
 				}
-				if (b[slow][i] === 0 && b[fast][i] === 0) {
-					fast++;
-				} else if (b[slow][i] === 0 && b[fast][i] !== 0) {
-					b[slow][i] = b[fast][i];
-					b[fast][i] = 0;
-					fast++;
-				} else if (b[slow][i] !== 0 && b[fast][i] === 0) {
-					fast++;
-				} else if (b[slow][i] !== 0 && b[fast][i] !== 0) {
-					if (b[slow][i] === b[fast][i]) {
-						b[slow][i] = b[slow][i] + b[fast][i];
-						b[fast][i] = 0;
-						fast = slow + 1;
-						slow++;
+				if (grid[trackerOne][i] === 0 && grid[trackerTwo][i] === 0) {
+					trackerTwo++;
+				} else if (grid[trackerOne][i] === 0 && grid[trackerTwo][i] !== 0) {
+					grid[trackerOne][i] = grid[trackerTwo][i];
+					grid[trackerTwo][i] = 0;
+					trackerTwo++;
+				} else if (grid[trackerOne][i] !== 0 && grid[trackerTwo][i] === 0) {
+					trackerTwo++;
+				} else if (grid[trackerOne][i] !== 0 && grid[trackerTwo][i] !== 0) {
+					if (grid[trackerOne][i] === grid[trackerTwo][i]) {
+						grid[trackerOne][i] = grid[trackerOne][i] + grid[trackerTwo][i];
+						grid[trackerTwo][i] = 0;
+						trackerTwo = trackerOne + 1;
+						trackerOne++;
 					} else {
-						slow++;
-						fast = slow + 1;
+						trackerOne++;
+						trackerTwo = trackerOne + 1;
 					}
 				}
 			}
 		}
-		if (JSON.stringify(oldBoardContentArray) !== JSON.stringify(b)) {
-			addNumber(b);
+		if (JSON.stringify(oldBoardContentArray) !== JSON.stringify(grid)) {
+			addNumber(grid);
 		}
 		if (checkerFlag) {
-			return b;
+			return grid;
 		} else {
-			setData(b);
+			setData(grid);
 		}
 	};
 
